@@ -10,5 +10,6 @@
     "minified": false,
     "checkSiteMap": false
   },
-  "compileType": "miniprogram"
+  "compileType": "miniprogram",
+  "enableShareAppMessage": "true"
 }
