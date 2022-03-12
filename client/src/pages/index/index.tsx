@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { View, Text, Image } from '@tarojs/components'
 import { useShareAppMessage } from '@tarojs/taro';
-import { INTRO_MAIN_1, INTRO_MAIN_2, INTRO_1, INTRO_2, INTRO_3, INTRO_4, LOGO } from '@/constant/img';
+import { INTRO_MAIN_1, INTRO_MAIN_2, INTRO_1, INTRO_2, INTRO_3, INTRO_4, LOGO } from './config';
 import './index.less'
 
 const Index: FC = () => {
