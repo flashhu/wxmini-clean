@@ -1,0 +1,86 @@
+.g-user {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #eee;
+
+
+  .m-arrow, .m-icon {
+    width: 50rpx;
+    height: 50rpx;
+
+    image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &>.m-row {
+    display: flex;
+    height: 200rpx;
+    align-items: center;
+    padding: 0 30rpx;
+    position: relative;
+    margin-bottom: 20rpx;
+    background: #fff;
+    border-bottom: 1px solid #aaa;
+
+    .m-logo {
+      display: flex;
+      width: 120rpx;
+      height: 120rpx;
+      /*background: #efefef;*/
+      border: 1px solid #aaa;
+      border-radius: 60rpx;
+      overflow: hidden;
+      image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .m-login {
+      flex: 1;
+      font-size: 32rpx;
+      margin-left: 30rpx;
+      image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .m-sect +.m-sect{
+    margin-top: 20rpx;
+  }
+
+  .m-sect {
+    display: flex;
+    flex-direction: column;
+
+    .m-row+.m-row {
+      margin-top: 20rpx;
+    }
+    .m-row {
+      display: flex;
+      background: #fff;
+      height: 110rpx;
+      align-items: center;
+      padding: 0 30rpx;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      box-sizing: border-box;
+
+      .m-icon {
+        margin-right: 30rpx;
+
+        image {
+          width: 100%;
+        }
+      }
+      .m-txt {
+        font-size: 32rpx;
+        flex: 1;
+      }
+    }
+  }
+}

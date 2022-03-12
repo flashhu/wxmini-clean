@@ -1,0 +1,80 @@
+@import "./style/var";
+
+.g-launch {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: #666;
+}
+
+page {
+  height: 100%;
+  width: 100%;
+}
+
+/*  #ifdef weapp  */
+view, image, text, navigator {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+.fn-red {
+  color: #dd0000;
+}
+
+.fn-btn-sb {
+    background: @AP_BASE;
+    border-radius: 5rpx;
+    margin: 20rpx 0;
+    height: 90rpx;
+    display: flex;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 20rpx;
+    right: 20rpx;
+    font-size: 36rpx;
+  }
+
+.g-msg {
+  position: fixed;
+  color: #fff;
+  right: 10rpx;
+  top: 10rpx;
+  width: calc( 100vw - 20rpx );
+  height: 80rpx;
+  transform: translateY(-90rpx);
+  padding: 20px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  opacity: .8;
+
+
+  &.is-show {
+    animation: anime 3s ease 1 normal;
+  }
+  &.is-success {
+    background-color: #28a746;
+  }
+  &.is-error {
+    background-color: #dc3446;
+  }
+}
+
+@keyframes anime {
+  16.666% { transform: translateY(0); } // 0.5秒
+  83.333% { transform: translateY(0); } // 2.5秒
+}
+
+@keyframes adv {
+  0%    { opacity: 0%;   } 
+  30%   { opacity: 100%; } 
+  70%   { opacity: 100%; } 
+  100%  { opacity: 0%;   }
+}
