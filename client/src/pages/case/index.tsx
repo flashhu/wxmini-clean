@@ -1,14 +1,21 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { observer } from 'mobx-react'
+import { useDidShow, useShareAppMessage } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { IMG_SERVER } from '@/constant/apis';
 import caseStore from '@/store/case';
 import './index.less'
 
 const Case: FC = () => {
-  useEffect(() => {
+  useShareAppMessage(res => ({
+      title: '艾尔森净化',
+      imageUrl: `${IMG_SERVER}/cdn/welogo.png`,
+      path: '/pages/order/index'
+  }));
+
+  useDidShow(() => {
     caseStore.getCaseList();
-  }, []);
+  });
 
   return (
     <View className='g-case'>
