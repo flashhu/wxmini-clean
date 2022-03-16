@@ -1,5 +1,4 @@
 const { LinValidator, Rule } = require('../../core/lin-validator-v2')
-const { User } = require('../models/user')
 const { LoginType } = require('../lib/enum')
 
 class PositiveIntegerValidator extends LinValidator {
@@ -38,17 +37,17 @@ class RegisterValidator extends LinValidator {
     }
 
     // 校验邮箱唯一
-    async validateEmail(vals) {
-        const email = vals.body.email
-        const user = await User.findOne({
-            where: {
-                email: email
-            }
-        })
-        if(user) {
-            throw new Error('email已存在')
-        }
-    }
+    // async validateEmail(vals) {
+    //     const email = vals.body.email
+    //     const user = await User.findOne({
+    //         where: {
+    //             email: email
+    //         }
+    //     })
+    //     if(user) {
+    //         throw new Error('email已存在')
+    //     }
+    // }
 }
 
 class TokenValidator extends LinValidator {
@@ -85,9 +84,18 @@ class NotEmptyValidator extends LinValidator {
     }
 }
 
+class AddCaseValidator extends LinValidator {
+    constructor() {
+        super();
+        this.name = [new Rule('isLength', '案例长度需为1~50位', { min: 1, max: 50 })];
+        this.img = [new Rule('isLength', '链接长度需为1~100位', { min: 1, max: 100 })];
+    }
+}
+
 module.exports = {
     PositiveIntegerValidator,
     RegisterValidator,
     TokenValidator,
-    NotEmptyValidator
+    NotEmptyValidator,
+    AddCaseValidator
 }
