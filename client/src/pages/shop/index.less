@@ -1,0 +1,125 @@
+.shop {
+  margin-top: 0px;
+  background: #efefef;
+}
+
+.shop__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+
+  &-txt {
+    font-size: 40rpx;
+    font-weight: 200;
+  }
+}
+
+.shop__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 0 20px;
+
+  .shop__list-item+.shop__list-item {
+    margin-left: 20rpx;
+  }
+
+  &-item {
+    display: flex;
+    flex-direction: column;
+    width: calc( (100vw - 60rpx)/2 );
+
+    &:nth-child(2n+1) {
+      margin-left: 0!important;
+    }
+
+    &-desc {
+      padding: 15rpx 20rpx 0 20rpx;
+      font-size: 30rpx;
+      overflow: hidden;
+    }
+
+    &-img {
+      width: calc((100vw - 30px) / 2);
+      height: calc((100vw - 30px) / 2);
+      background: #f4f4f4;
+      border-radius: 4px;
+    }
+
+    &-info {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #fff;
+      border-radius: 10rpx;
+
+      .m-swiper {
+        height: calc((100vw - 30px) / 2);
+      }
+    }
+
+    &-name {
+      color: #333;
+      padding: 10rpx 20rpx;
+      font-size: 20rpx;
+      line-height: 40rpx;
+      overflow: hidden;
+      text-align: right;
+    }
+
+    &-price-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 20rpx 10rpx;
+    }
+
+    &-price {
+      color: #da5932;
+      position: relative;
+      display: flex;
+      align-items: baseline;
+
+      .m-i {
+        font-size: 40rpx;
+      }
+      .m-f {
+        font-size: 20rpx;
+      }
+
+      &:before {
+        content: '¥';
+        display: block;
+        font-size: 24rpx;
+        position: absolute;
+        left: -20rpx;
+        bottom: 6rpx;
+      }
+    }
+  }
+}
+
+
+.more {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+
+  &-txt {
+    color: #666;
+    font-size: 24px;
+  }
+}
+
+.fab{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}

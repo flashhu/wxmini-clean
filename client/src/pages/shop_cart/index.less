@@ -1,0 +1,149 @@
+@import '../../style/atom.less';
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f9f9f9;
+  min-height: 100vh;
+
+  .cart_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .cart_item {
+      position: relative;
+      display: flex;
+      margin-top: 20px;
+      height: 300px;
+      width: 700px;
+      border-radius: 30px;
+      background-color: white;
+
+      &_right_top {
+        position: absolute;
+        right: 10rpx;
+        top: 10rpx;
+
+        .icon {
+          height: 50rpx;
+          width: 50rpx;
+        }
+      }
+
+      &_left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 220px;
+        height: 300px;
+        margin-left: 20px;
+
+        image {
+          margin-top: 50px;
+          border-radius: 5px;
+          width: 200px;
+          height: 200px;
+        }
+
+      }
+
+      &_right {
+        padding: 36px;
+        display: flex;
+        flex-direction: column;
+        width: 510px;
+        height: 300px;
+
+        &_title {
+          margin-top: 15px;
+          color: #333;
+          padding: 5px 10px;
+          width: 510px;
+          font-size: 32px;
+          line-height: 40px;
+          overflow: hidden;
+        }
+
+        &_spe {
+          color: #333;
+          padding: 5px 10px;
+          width: 510px;
+          font-size: 28px;
+          line-height: 40px;
+          overflow: hidden;
+        }
+
+        &_price {
+          color: #333;
+          padding: 10px 10px;
+          width: 510px;
+          font-size: 28px;
+          line-height: 40px;
+          overflow: hidden;
+        }
+
+        &_buy-quantity {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          margin-top: 20px;
+          margin-right: 50px;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+.cart_footer {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0px;
+  height: 100px;
+  width: 100%;
+  background-color: white;
+
+  .left {
+    margin-left: 40px;
+    display: flex;
+    flex: 1;
+    line-height: 100px;
+
+    .await-pay {
+      margin: 0px;
+    }
+
+    .amount-money {
+      color: red;
+      margin: 0px;
+    }
+
+    .amount-money::first-letter {
+      font-size: 24px;
+    }
+
+  }
+
+  .right {
+    display: flex;
+    width: 280px;
+    flex-direction: row;
+    align-items: center;
+
+    .button {
+      height: 60px;
+      line-height: 60px;
+      background-color: #FF0033;
+      background-image: linear-gradient(#FF0033, #FF0066);
+      border: tomato;
+    }
+
+  }
+
+}

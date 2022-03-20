@@ -19,6 +19,7 @@ const User: FC = () => {
   }))
 
   useDidShow(() => {
+    // TODO: token
     const u = Taro.getStorageSync('user');
     const user = u ? JSON.parse(u) : null;
     if (user !== null) {
@@ -86,7 +87,9 @@ const User: FC = () => {
           }
       </View>
       {(userName && userName != "请登录") &&
-        <View className="fn-btn-sb" onClick={handleLogout}>退出登录</View>
+        <View className="fn-btn-danger">
+          <Text onClick={handleLogout}>退出登录</Text>
+        </View>
       }
     </View>
   )

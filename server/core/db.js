@@ -43,7 +43,6 @@ const getConn = () => {
  * @param {string} sql 查询语句
  */
 var querySQL = async (sql) => {
-  console.log(sql);
   const conn = await getConn();
   return new Promise((resolve, reject) => {
     conn.query(sql, (err, rows) => {
@@ -51,7 +50,7 @@ var querySQL = async (sql) => {
         console.log('query fail', sql, err);
         reject(err);
       } else {
-        console.log('get row', rows)
+        // console.log('get row', rows)
         resolve(rows);
       }
       conn.release();
@@ -62,12 +61,13 @@ var querySQL = async (sql) => {
 /**
  * 查询语句
  * @param {string} table 表名
+ * @param {array} keys 键 ['a', 'b']
  * @param {string} where 完整where语句
  * @param {string} order 完整order语句
  * @param {string} limit 完整limit语句
  */
-var select = async (table, where = '', order = '', limit = '') => {
-  const sql = `select * from ${table} ${where} ${order} ${limit}`;
+var select = async (table, keys = ['*'], where = '', order = '', limit = '') => {
+  const sql = `select ${keys.join(',')} from ${table} ${where} ${order} ${limit}`;
   return querySQL(sql);
 };
 

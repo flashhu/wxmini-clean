@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx"
-import Taro from '@tarojs/taro'
+import Taro, { UserInfo } from '@tarojs/taro'
 
 class UserStore {
   user = 'test';
@@ -24,20 +24,15 @@ class UserStore {
     })
   }
 
-  login() {
-    return new Promise<void>((resolve, reject) => {
+  /**
+   * 用户信息
+   */
+  getWXUserInfo() {
+    return new Promise<UserInfo>((resolve, reject) => {
       Taro.getUserProfile({
         desc: '用于完善会员资料',
         success: async (res) => {
-          const user = {
-            name: res.userInfo.nickName,
-            city: res.userInfo.city,
-            prov: res.userInfo.province,
-            img: res.userInfo.avatarUrl
-          };
-          console.log('set user', user);
-          Taro.setStorageSync('user',JSON.stringify(user));
-          resolve();
+          resolve(res.userInfo);
         },
         fail: err => {
           console.log(err);
@@ -45,6 +40,23 @@ class UserStore {
         },
       })
     })
+  }
+
+  async login() {
+    // 1. 获取用户信息
+    const info = await this.getWXUserInfo();
+    const user = {
+      name: info.nickName,
+      city: info.city,
+      prov: info.province,
+      img: info.avatarUrl
+    };
+    Taro.setStorageSync('user',JSON.stringify(user));
+    // 2. 获取 openid，将带有映射关系的 uid 保存到 token 中
+    const code = await this.getWXCode();
+    // TODO: token
+    console.log('code', code);
+    // const
   }
 }
 
