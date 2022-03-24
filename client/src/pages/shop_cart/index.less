@@ -4,22 +4,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f9f9f9;
+  background: #eee;
   min-height: 100vh;
 
   .cart_list {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 120rpx;
 
     .cart_item {
       position: relative;
       display: flex;
-      margin-top: 20px;
+      margin-top: 20rpx;
       height: 300px;
       width: 700px;
       border-radius: 30px;
       background-color: white;
+
+      .at-input-number__btn {
+        color: #7c7c7c;
+      }
 
       &_right_top {
         position: absolute;
@@ -105,7 +110,6 @@
   flex-direction: row;
   position: fixed;
   bottom: 0px;
-  height: 100px;
   width: 100%;
   background-color: white;
 
@@ -139,11 +143,8 @@
     .button {
       height: 60px;
       line-height: 60px;
-      background-color: #FF0033;
-      background-image: linear-gradient(#FF0033, #FF0066);
-      border: tomato;
+      border: none;
+      background-color: #6190E8;
     }
-
   }
-
 }

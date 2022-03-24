@@ -1,3 +1,7 @@
+.flex {
+  display: flex;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
@@ -14,6 +18,12 @@
   justify-content: space-between;
 }
 
+.flex-column-space-bet {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .flex-column-center {
   display: flex;
   align-items: center;
@@ -24,12 +34,20 @@
   align-items: baseline;
 }
 
+.f-14 {
+  font-size: 28rpx;
+}
+
 .f-black {
   color: #222;
 }
 
 .f-gray7 {
   color: #777;
+}
+
+.f-gray9 {
+  color: #9c9c9c;
 }
 
 .f-bold {
@@ -44,8 +62,36 @@
   font-size: 48rpx;
 }
 
+.p-8 {
+  padding: 16rpx;
+}
+
+.p-12 {
+  padding: 24rpx;
+}
+
+.p-16 {
+  padding: 32rpx;
+}
+
+.pt-8 {
+  padding-top: 16rpx;
+}
+
+.ml-4 {
+  margin-left: 8rpx;
+}
+
 .ml-8 {
   margin-left: 16rpx;
+}
+
+.ml-16 {
+  margin-left: 32rpx;
+}
+
+.mt-8 {
+  margin-top: 16rpx;
 }
 
 .bg-white {
@@ -63,6 +109,11 @@
 // 适配 iphoneX
 // https://webkit.org/blog/7929/designing-websites-for-iphone-x/?hmsr=funteas.com&utm_medium=funteas.com&utm_source=funteas.com
 .safe-area-bottom {
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: constant(safe-area-inset-bottom) !important;
+  padding-bottom: env(safe-area-inset-bottom) !important;
+}
+
+.safe-area-bottom-margin {
+  margin-bottom: constant(safe-area-inset-bottom) !important;
+  margin-bottom: env(safe-area-inset-bottom) !important;
 }

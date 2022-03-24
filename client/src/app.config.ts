@@ -1,16 +1,17 @@
 export default defineAppConfig({
   pages: [
-    'pages/index/index',
-    'pages/launch/index',
     'pages/user/index',
+    'pages/his_addr/index',
     'pages/order/index',
+    'pages/index/index',
     'pages/shop/index',
+    'pages/shop_buy/index',
+    'pages/launch/index',
     'pages/shop_sp/index',
     'pages/shop_cart/index',
-    'pages/shop_buy/index',
     'pages/case/index',
     'pages/his_order/index',
-    'pages/his_shopping/index'
+    'pages/his_shopping/index',
   ],
   tabBar: {
     color: '#aaa',

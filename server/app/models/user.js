@@ -7,7 +7,7 @@ const registerByOpenid = async (openid) => {
 }
 
 const getUserByOpenid = async (openid) => {
-  const user = await db.select('cl_users', ['*'], `where openid = '${openid}'`);
+  const user = await db.select('cl_users', ['*'], { openid });
   return user.length ? user[0] : undefined;
 }
 

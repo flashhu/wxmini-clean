@@ -30,7 +30,7 @@ class Auth {
                 if (error.name == 'TokenExpiredError') {
                     errMsg = 'token已过期'
                 }
-                throw new Forbidden(errMsg)
+                throw new Forbidden(errMsg, 1001)
             }
 
             if (this.level > decode.scope) {
@@ -42,7 +42,7 @@ class Auth {
 
             // uid, scope
             ctx.auth = {
-                uid: decode.uid, 
+                uid: decode.uid,
                 scope: decode.scope
             }
 

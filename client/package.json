@@ -41,6 +41,7 @@
     "@tarojs/react": "3.4.1",
     "@tarojs/runtime": "3.4.1",
     "@tarojs/taro": "3.4.1",
+    "js-base64": "^3.7.2",
     "mobx": "^6.4.2",
     "mobx-react": "^7.3.0",
     "react": "^17.0.0",

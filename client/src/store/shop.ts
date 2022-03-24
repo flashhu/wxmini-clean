@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import Taro from '@tarojs/taro';
 import { getGoods } from '@/service/shop';
 import { GoodItem } from '@/typings/good';
+
 class ShopStore {
   // 商品列表
   list: GoodItem[] = [];
@@ -9,6 +10,12 @@ class ShopStore {
   selectedId = 1;
   // 购物车列表
   cartList: GoodItem[] = [];
+  // 地址列表
+  addrList: [] = [];
+  // 当前选中的地址
+  seletedAddr = {
+    name: 'aaa'
+  };
 
   constructor() {
     makeAutoObservable(this);

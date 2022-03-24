@@ -62,12 +62,17 @@ var querySQL = async (sql) => {
  * 查询语句
  * @param {string} table 表名
  * @param {array} keys 键 ['a', 'b']
- * @param {string} where 完整where语句
- * @param {string} order 完整order语句
- * @param {string} limit 完整limit语句
+ * @param {object} where json { a: 1 }
+ * @param {array} order ['a DESC', 'b ASC']
+ * @param {array} limit [offset , count]
  */
-var select = async (table, keys = ['*'], where = '', order = '', limit = '') => {
-  const sql = `select ${keys.join(',')} from ${table} ${where} ${order} ${limit}`;
+var select = async (table, keys = ['*'], where = {}, order = [], limit = []) => {
+  const whereKeys = [];
+  prepareParm(where, [], [], whereKeys);
+  const whereSql = whereKeys.length ? `where ${whereKeys.join(' and ')}` : '';
+  const orderSql = order.length ? `order by ${order.join(',')}` : '';
+  const limitSql = limit.length ? `limit ${limit.join(',')}` : '';
+  const sql = `select ${keys.join(',')} from ${table} ${whereSql} ${orderSql} ${limitSql}`;
   return querySQL(sql);
 };
 
@@ -76,7 +81,7 @@ var select = async (table, keys = ['*'], where = '', order = '', limit = '') => 
  * @param {string} table 表名
  * @param {object} where json
  */
-var del = async (table, where) => {
+var del = async (table, where = {}) => {
   let whereSql = [];
   prepareParm(where, [], [], whereSql);
   whereSql = whereSql.join(' and ');
@@ -89,7 +94,7 @@ var del = async (table, where) => {
  * @param {string} table 表名
  * @param {object} params json
  */
-var add = async (table, params) => {
+var add = async (table, params = {}) => {
   let fieldList = []
   let valList = []
   prepareParm(params, fieldList, valList, [])
@@ -103,7 +108,7 @@ var add = async (table, params) => {
  * @param {object} params json
  * @param {object} where json
  */
-var modify = async (table, params, where) => {
+var modify = async (table, params = {}, where = {}) => {
   let setSql = [];
   let whereSql = [];
   prepareParm(params, [], [], setSql);

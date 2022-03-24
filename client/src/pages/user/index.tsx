@@ -1,11 +1,9 @@
 import { FC, useState } from 'react'
 import Taro, { useDidShow, useShareAppMessage } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
-import { DEFAULT_USERNAME, LOGO } from './config'
+import { DEFAULT_USERNAME, LOGO, Menus } from './config'
 import DEFAULT_AVATAR from '@/static/ico_user.png';
 import ICON_ARROW from '@/static/ico_right.png';
-import ICON_GOODS from '@/static/ico_goods.png';
-import ICON_ORDER from '@/static/ico_order.png';
 import './index.less'
 
 const User: FC = () => {
@@ -19,11 +17,9 @@ const User: FC = () => {
   }))
 
   useDidShow(() => {
-    // TODO: token
     const u = Taro.getStorageSync('user');
     const user = u ? JSON.parse(u) : null;
     if (user !== null) {
-      console.log('get user', user);
       setUserName(user.name);
       setAvatar(user.img);
     }
@@ -36,18 +32,21 @@ const User: FC = () => {
   }
 
   const handleLogout = () => {
-    setUserName(DEFAULT_USERNAME);
-    setAvatar(DEFAULT_AVATAR);
-    Taro.setStorageSync('user', null);
-    Taro.switchTab({ url: `/pages/order/index` });
+    Taro.showModal({
+      content: '是否确认退出该账号？',
+      success: function (res) {
+        if (res.confirm) {
+          setUserName(DEFAULT_USERNAME);
+          setAvatar(DEFAULT_AVATAR);
+          Taro.setStorageSync('user', undefined);
+          Taro.setStorageSync('token', undefined);
+        }
+      }
+    })
   }
 
-  const goToOrderList = () => {
-    Taro.navigateTo({ url: `/pages/his_order/index` })
-  }
-
-  const goToShoppingList = () => {
-    Taro.navigateTo({ url: `/pages/his_shopping/index` })
+  const goToOtherPage = (url: string) => {
+    Taro.navigateTo({ url })
   }
 
   return (
@@ -65,24 +64,21 @@ const User: FC = () => {
       <View className="m-sect">
         {(userName !== DEFAULT_USERNAME) &&
           <>
-            <View className="m-row" onClick={goToOrderList}>
-              <View className="m-icon">
-                <Image src={ICON_ORDER}></Image>
+            {Menus?.map((item, index) => (
+              <View
+                key={index}
+                className="m-row"
+                onClick={() => { goToOtherPage(item?.url) }}
+              >
+                <View className="m-icon">
+                  <Image src={item?.icon}></Image>
+                </View>
+                <Text className="m-txt">{item?.title}</Text>
+                <View className="m-arrow">
+                  <Image src={ICON_ARROW}></Image>
+                </View>
               </View>
-              <Text className="m-txt">历史订单</Text>
-              <View className="m-arrow">
-                <Image src={ICON_ARROW}></Image>
-              </View>
-            </View>
-            <View className="m-row" onClick={goToShoppingList}>
-              <View className="m-icon">
-                <Image src={ICON_GOODS}></Image>
-              </View>
-              <Text className="m-txt">历史购物</Text>
-              <View className="m-arrow">
-                <Image src={ICON_ARROW}></Image>
-              </View>
-            </View>
+            ))}
           </>
           }
       </View>

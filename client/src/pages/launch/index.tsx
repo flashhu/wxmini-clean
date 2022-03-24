@@ -9,7 +9,6 @@ import './index.less'
 const Launch: FC = () => {
   const login = async () => {
     await userStore.login();
-    Taro.navigateBack();
   }
 
   return (

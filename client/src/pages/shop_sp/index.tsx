@@ -51,7 +51,7 @@ const GoodDetail: FC = () => {
       });
     } else {
       // 下单
-      Taro.navigateTo({ url: '/pages/shop_buy/index' });
+      Taro.navigateTo({ url: `/pages/shop_buy/index?count=${count}` });
     }
     setIsOpened(false);
     setCount(1);
@@ -91,7 +91,7 @@ const GoodDetail: FC = () => {
             <Image className='item-footer__nav-img' src={require('../../static/icon_cart.png')} />
           </View>
           <AtFloatLayout isOpened={isOpened} title="请选择规格" onClose={handleClose}>
-            <View className="popup-content">
+            <View className="popup-content safe-area-bottom-margin">
               <view>
                 <view className="flex-column-base">
                   <Image className='img' src={`${IMG_SERVER}/${img_h1}`} />

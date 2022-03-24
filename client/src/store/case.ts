@@ -24,7 +24,8 @@ class CaseStore {
       console.log(error);
       Taro.hideLoading();
       Taro.showToast({
-        title: '网络异常'
+        icon: 'none',
+        title: '网络异常, 请重试'
       })
     }
   }

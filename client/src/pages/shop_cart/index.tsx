@@ -17,9 +17,9 @@ const ShopCart: FC = () => {
 
   return (
     <View className='cart'>
-      {
-        shopStore?.cartList?.length ? shopStore?.cartList?.map((item, index) => {
-          return <View className="cart_list">
+      <View className="cart_list">
+        {
+          shopStore?.cartList?.length ? shopStore?.cartList?.map((item, index) => (
             <View className="cart_item">
               <view className='cart_item_right_top' onClick={() => { shopStore.changeCartList(0, index) }}>
                 <Image className="icon" src={ICON_DEL}></Image>
@@ -44,14 +44,14 @@ const ShopCart: FC = () => {
                 </View>
               </View>
             </View>
-          </View>
-        }) : (
-          <view className='f-gray7 flex-center h-100v'>
-            购物车空空如也，快去逛逛吧～
-          </view>
-        )
-      }
-      <View className="cart_footer">
+          )) : (
+            <view className='f-gray7 flex-center h-100v'>
+              购物车空空如也，快去逛逛吧～
+            </view>
+          )
+        }
+      </View>
+      <View className="cart_footer safe-area-bottom">
         <View className="left">
           <Text className="await-pay">合计： </Text>
           <Text className="amount-money">¥ {shopStore?.cartSumCount}</Text>
@@ -59,9 +59,10 @@ const ShopCart: FC = () => {
         <View className="right">
           <AtButton
             className="button"
+            circle
             type="primary"
             disabled={shopStore?.cartList?.length === 0}
-            onClick={() => Taro.navigateTo({ url: '/pages/shop_buy/index' })}
+            onClick={() => { Taro.navigateTo({ url: '/pages/shop_buy/index' })}}
           >
             去结算
           </AtButton>
