@@ -1,7 +1,7 @@
 const Router = require('koa-router')
 const { success } = require('../../lib/helper')
 const { AddCaseValidator } = require('../../validators/validator');
-const { addCase, getCases } = require('../../models/cases');
+const { Case } = require('../../models/case');
 
 const router = new Router({
     prefix: '/v1/case'
@@ -12,15 +12,12 @@ const router = new Router({
  */
 router.post('/add', async (ctx)=> {
   const v = await new AddCaseValidator().validate(ctx);
-  await addCase({
-    name: v.get('body.name'),
-    img: v.get('body.img')
-  });
+  await Case.addCase(v.get('body.name'), v.get('body.img'));
   success('添加案例成功！');
 })
 
 router.get('/list', async (ctx)=> {
-  const res = await getCases();
+  const res = await Case.getCases();
   ctx.body = {
     data: res
   };

@@ -1,9 +1,9 @@
 const util = require('util')
 const axios = require('axios')
 const { AuthFailed } = require('../../core/httpException')
+const { User } = require('../models/user')
 const { generateToken } = require('../../core/util')
 const { Auth } = require('../../middlewares/auth')
-const { getUserByOpenid, registerByOpenid } = require('../../app/models/user');
 
 class WXManager {
     static async codeToToken(code) {
@@ -14,6 +14,7 @@ class WXManager {
             global.config.wx.appSecret,
             code
         )
+
         const result = await axios.get(url)
         if (result.status !== 200) {
             throw new AuthFailed('openid获取失败')
@@ -25,10 +26,9 @@ class WXManager {
 
         // 2. 判断有无注册 -> 注册
         const openid = result.data.openid
-        let user = await getUserByOpenid(openid)
+        let user = await  User.getUserByOpenid(openid)
         if(!user) {
-            await registerByOpenid(openid)
-            user = await getUserByOpenid(openid)
+            user = await User.registerByOpenid(openid)
         }
 
         // 3. 返回token

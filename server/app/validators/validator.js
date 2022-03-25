@@ -98,10 +98,10 @@ class AddAddrValidator extends LinValidator {
         this.name = [new Rule('isLength', '姓名长度需为1~20位', { min: 1, max: 20 })];
         this.phone = [new Rule('isMobilePhone', '请检查手机号格式', 'zh-CN')];
         this.addr = [new Rule('isLength', '地址长度需为1～50位', { min: 1, max: 50 })];
-        this.isDefault = [
+        this.is_default = [
             // 可为空
             new Rule('isOptional'),
-            new Rule('isInt', '请检查是否默认的传参类型', { min: 0, max: 1 })
+            new Rule('isBoolean', '请检查是否默认的传参类型')
         ];
     }
 }
@@ -113,7 +113,15 @@ class UpdateAddrValidator extends LinValidator {
         this.name = [new Rule('isOptional'), new Rule('isLength', '姓名长度需为1~20位', { min: 1, max: 20 })];
         this.phone = [new Rule('isOptional'), new Rule('isMobilePhone', '请检查手机号格式', 'zh-CN')];
         this.addr = [new Rule('isOptional'), new Rule('isLength', '地址长度需为1～50位', { min: 1, max: 50 })];
-        this.isDefault = [new Rule('isOptional'), new Rule('isInt', '请检查是否默认的传参类型', { min: 0, max: 1 })];
+        this.is_default = [new Rule('isOptional'), new Rule('isBoolean', '请检查是否默认的传参类型')];
+    }
+}
+
+class BuyGoodsValidator extends LinValidator {
+    constructor() {
+        super();
+        this.addr_id = [ new Rule('isInt', '请检查地址的传参', { min: 1 })];
+        this.sum_price = [ new Rule('isInt', '请检查总价的传参', { min: 1 })];
     }
 }
 
@@ -124,5 +132,6 @@ module.exports = {
     NotEmptyValidator,
     AddCaseValidator,
     AddAddrValidator,
-    UpdateAddrValidator
+    UpdateAddrValidator,
+    BuyGoodsValidator
 }

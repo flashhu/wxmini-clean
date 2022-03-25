@@ -12,13 +12,15 @@
     "axios": "^0.19.2",
     "basic-auth": "^2.0.1",
     "bcryptjs": "^2.4.3",
+    "dayjs": "^1.11.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.1.0",
     "lodash": "^4.17.19",
-    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
     "require-directory": "^2.1.1",
+    "sequelize": "^6.17.0",
     "util": "^0.12.3",
     "validator": "^13.1.1"
   }

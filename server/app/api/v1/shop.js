@@ -1,6 +1,7 @@
 const Router = require('koa-router')
-const { getGoods, getGoodDetail } = require('../../models/goods');
-const { PositiveIntegerValidator } = require('../../validators/validator');
+const { Auth } = require('../../../middlewares/auth');
+const { Good } = require('../../models/good');
+const { PositiveIntegerValidator, BuyGoodsValidator } = require('../../validators/validator');
 
 const router = new Router({
     prefix: '/v1/shop'
@@ -10,21 +11,26 @@ const router = new Router({
  * 商品列表
  */
 router.get('/goodList', async (ctx)=> {
-  const res = await getGoods();
+  const res = await Good.getGoods();
   ctx.body = {
     data: res
   };
 })
 
-/**
- * 商品详情
- */
-router.get('/goodDetail/:id', async (ctx)=> {
-  const v = await new PositiveIntegerValidator().validate(ctx);
-  await getGoodDetail(v.get('path.id'));
-  ctx.body = {
-    data: 'ok'
-  };
-})
+
+// router.post('/buy', new Auth().m, async (ctx)=> {
+//   const v = await new BuyGoodsValidator().validate(ctx);
+//   const { addr_id, sum_price, list } = v.get('body');
+//   const order = await createGoodOrder({
+//     user_id: ctx.auth.uid,
+//     addr_id,
+//     sum_price
+//   })
+//   console.log('order', order);
+//   await getGoodDetail(v.get('path.id'));
+//   ctx.body = {
+//     data: 'ok'
+//   };
+// })
 
 module.exports = router
