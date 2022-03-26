@@ -120,8 +120,17 @@ class UpdateAddrValidator extends LinValidator {
 class BuyGoodsValidator extends LinValidator {
     constructor() {
         super();
-        this.addr_id = [ new Rule('isInt', '请检查地址的传参', { min: 1 })];
+        this.address_id = [ new Rule('isInt', '请检查地址的传参', { min: 1 })];
         this.sum_price = [ new Rule('isInt', '请检查总价的传参', { min: 1 })];
+    }
+
+    validateLoginType(vals) {
+        if(!vals.body.list) {
+            throw new Error('请检查是否传递商品列表')
+        }
+        if (!Array.isArray(vals.body.list)) {
+            throw new Error('请检查商品列表的类型')
+        }
     }
 }
 

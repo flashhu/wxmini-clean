@@ -1,7 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import Taro from '@tarojs/taro';
-import { getGoods } from '@/service/shop';
+import * as dayjs from 'dayjs'
+import { getGoods, buyGoods, getGoodOrders } from '@/service/shop';
 import { GoodItem } from '@/typings/good';
+import { BuyGoodRequestParam, OrderListItem } from '@/typings/good_order';
 
 class ShopStore {
   // 商品列表
@@ -10,17 +12,16 @@ class ShopStore {
   selectedId = 1;
   // 购物车列表
   cartList: GoodItem[] = [];
-  // 地址列表
-  addrList: [] = [];
-  // 当前选中的地址
-  seletedAddr = {
-    name: 'aaa'
-  };
+  // 区分下单商品页的入口
+  isFromCart = false;
+  // 商品订单列表
+  orderList: OrderListItem[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
+  // 商品列表
   async getGoodList() {
     try {
       Taro.showLoading({
@@ -34,14 +35,59 @@ class ShopStore {
     } catch (error) {
       console.log(error);
       Taro.hideLoading();
-      Taro.showToast({
-        title: '网络异常'
+    }
+  }
+
+  // 商品订单列表
+  async getGoodOrderList() {
+    try {
+      Taro.showLoading({
+        title: '加载中',
       })
+      const res = await getGoodOrders();
+      runInAction(() => {
+        this.orderList = (res?.rows ?? [])?.map((item) => ({
+          ...item,
+          date: dayjs(item?.date).format('YYYYMMDDHHmmss')
+        }));
+        // TODO: 分页取数
+      })
+      Taro.hideLoading();
+    } catch (error) {
+      console.log(error);
+      Taro.hideLoading();
+    }
+  }
+
+  // 商品下单
+  async payForGoods(params: BuyGoodRequestParam) {
+    try {
+      // TODO: 微信支付
+      Taro.showLoading({
+        title: '加载中',
+      })
+      await buyGoods(params);
+      Taro.hideLoading();
+      // 如果是从购物车下单，清空购物车数据
+      if (this.isFromCart) {
+        runInAction(() => {
+          this.cartList = [];
+        })
+        Taro.setStorageSync('cartList', []);
+      }
+      Taro.navigateTo({ url: '/pages/his_shopping/index' });
+    } catch (error) {
+      console.log(error);
+      Taro.hideLoading();
     }
   }
 
   setSelectedId(id: number) {
     this.selectedId = id;
+  }
+
+  setIsFromCart(val: boolean) {
+    this.isFromCart = val;
   }
 
   getCartList() {
@@ -62,7 +108,6 @@ class ShopStore {
       } as GoodItem);
     }
     Taro.setStorageSync('cartList',this.cartList);
-    console.log(this.cartList);
   }
 
   // 修改购物车

@@ -1,3 +1,4 @@
+// -------- /v1/shop/goodList --------
 export interface GoodItem {
   id: number,
   name: string,

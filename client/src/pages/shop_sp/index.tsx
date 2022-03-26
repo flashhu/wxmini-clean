@@ -74,11 +74,11 @@ const GoodDetail: FC = () => {
             <Image className='img' src={`${IMG_SERVER}/${img_h2}`} />
           </SwiperItem>
         </Swiper>
+        <View className='goods_price f-bold'>￥{price}</View>
         <View className='goods_top'>
           <View className='goods_name'>{name}</View>
           <View className='goods_desc'>{spec}/{unit}</View>
         </View>
-        <View className='goods_price f-bold'>￥ {price}</View>
         <Image mode='widthFix' className='detail' src={`${IMG_SERVER}/${img_bd}`} />
         {/* TODO: 评论 */}
       </ScrollView>

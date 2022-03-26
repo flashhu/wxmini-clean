@@ -31,10 +31,12 @@ const ConfirmOrder: FC = () => {
         count: Number(count)
       } as GoodItem]);
       setSumPrice((Number(shopStore?.currGoodInfo?.price) || 0) * Number(count));
+      shopStore.setIsFromCart(false);
     } else {
       // 购物车下单
       setBuyList(shopStore?.cartList || []);
       setSumPrice(shopStore?.cartSumCount);
+      shopStore.setIsFromCart(true);
     }
     if(addressIndex) {
       // 从地址列表页指定地址
@@ -47,7 +49,19 @@ const ConfirmOrder: FC = () => {
   }
 
   const handlePay = () => {
-    console.log('pay');
+    const list = buyList?.map((item) => ({
+      good_id: item?.id,
+      count: Number(item?.count),
+      // 某件商品的总价
+      sum_price: Number(item?.count) * Number(item?.price)
+    }))
+    const orderInfo = {
+      address_id: addrStore?.selectedAddress?.id,
+      // 订单总价
+      sum_price: sumPrice,
+      list
+    }
+    shopStore.payForGoods(orderInfo);
   }
 
   return (

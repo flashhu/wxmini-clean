@@ -2,7 +2,6 @@ const Router = require('koa-router')
 const { success } = require('../../lib/helper')
 const { Auth } = require('../../../middlewares/auth')
 const { Address } = require('../../models/address');
-
 const { AddAddrValidator, PositiveIntegerValidator, UpdateAddrValidator } = require('../../validators/validator')
 
 const router = new Router({

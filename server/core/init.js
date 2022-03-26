@@ -1,5 +1,7 @@
 const Router = require('koa-router')
 const requireDirectory = require('require-directory')
+// 初始化外键
+require('./association')
 
 // 初始化管理器
 class InitManager {

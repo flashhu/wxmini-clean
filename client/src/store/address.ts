@@ -30,9 +30,14 @@ class AddressStore {
         title: '加载中',
       })
       const res = await addAddress(data);
-      if(res?.data) {
+      if (res?.data) {
+        const newList = this.addrList.map((item) => ({
+          ...item,
+          // 只有一个默认地址
+          is_default: data.is_default ? false : item?.is_default
+        }));
         runInAction(() => {
-          this.addrList = [...this.addrList, res?.data];
+          this.addrList = [...newList, res?.data];
         })
       }
       Taro.showToast({
@@ -73,10 +78,14 @@ class AddressStore {
       })
       await updateAddress(params);
       runInAction(() => {
-        this.addrList[index] = {
-          ...this.addrList[index],
-          ...params
-        };
+        this.addrList = this.addrList.map((item, i) => {
+          if (i === index) {
+            return { ...item, ...params };
+          } else {
+            // 只有一个默认地址
+            return { ...item, is_default: params.is_default ? false : item?.is_default };
+          }
+        });
       })
       Taro.showToast({
         title: '地址已更新'

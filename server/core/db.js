@@ -38,6 +38,7 @@ const sequelize = new Sequelize(dbName, user, password, {
 // Sync all defined models to the DB.
 sequelize.sync({ force: false })
 
+// 全局字段抛出时过滤时间戳
 Model.prototype.toJSON = function () {
   let data = clone(this.dataValues)
   unset(data, 'updated_at')

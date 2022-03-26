@@ -74,7 +74,10 @@ Address.init({
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: Sequelize.INTEGER,
+  user_id: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
   name: Sequelize.STRING(50),
   phone: Sequelize.STRING(15),
   addr: Sequelize.STRING(50),

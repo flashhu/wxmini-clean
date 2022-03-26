@@ -4,10 +4,9 @@ import Taro, { useDidShow, useShareAppMessage } from '@tarojs/taro'
 import { AtFab } from 'taro-ui'
 import { View, Text, Image, Swiper, SwiperItem } from '@tarojs/components'
 import { IMG_SERVER } from '@/constant/apis';
+import { fract } from '@/utils/utils'
 import shopStore from '@/store/shop';
 import './index.less'
-
-const fract = (n) => (n - Math.trunc(n)) * 100;
 
 const Shop: FC = () => {
   useShareAppMessage(res => ({
@@ -49,7 +48,7 @@ const Shop: FC = () => {
               <View className='shop__list-item-price-wrap'>
                 <View className='shop__list-item-price'>
                   <Text className="m-i">{parseInt(item?.price)}</Text>.
-                  <Text className="m-f">{fract(item?.price).toString().padEnd(2, '0')}</Text>
+                  <Text className="m-f">{fract(item?.price)}</Text>
                 </View>
               </View>
             </View>

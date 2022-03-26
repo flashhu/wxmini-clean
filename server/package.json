@@ -12,7 +12,6 @@
     "axios": "^0.19.2",
     "basic-auth": "^2.0.1",
     "bcryptjs": "^2.4.3",
-    "dayjs": "^1.11.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",

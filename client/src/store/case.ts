@@ -23,10 +23,6 @@ class CaseStore {
     } catch (error) {
       console.log(error);
       Taro.hideLoading();
-      Taro.showToast({
-        icon: 'none',
-        title: '网络异常, 请重试'
-      })
     }
   }
 }

@@ -5,18 +5,6 @@ class Good extends Model {
   static async getGoods() {
     return await Good.findAll();
   }
-
-// /**
-//  * 创建订单
-//  */
-// const createGoodOrder = async (params) => {
-//   const currTime = dayjs().format('YYYYMMDDHHmmss');
-//   const vals = { ...params, created_at: currTime };
-//   await db.add('cl_goods_order', vals);
-//   const rows = await db.select('cl_goods_order', ['*'], vals);
-//   return rows?.length ? rows[0] : undefined;
-// }
-
 }
 
 Good.init({
