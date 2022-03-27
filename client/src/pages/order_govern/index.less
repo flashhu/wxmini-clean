@@ -1,0 +1,330 @@
+@import "../../style/var.less";
+@import "../../style/atom.less";
+
+.g-govern {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  background: #fff;
+  height: 100vh;
+
+  .m-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20rpx;
+
+    .m-tl {
+      font-size: 36rpx;
+      color: #777;
+      margin: 0 16rpx;
+      padding-bottom: 16rpx;
+      border-bottom: 8rpx solid transparent;
+      transition: 0.2s ease-in;
+
+      &.active {
+        font-weight: 500;
+        color: #11aadd;
+        border-bottom: 8rpx solid #11aadd;
+      }
+    }
+  }
+
+  .m-result {
+    margin-top: 20rpx;
+    padding: 20rpx 30rpx;;
+    color: #000;
+    border: 1rpx solid #ccc;
+    border-radius: 6rpx;
+
+    .m-wrap {
+      display: flex;
+      .m-tl {
+        flex: 1;
+        color: #999;
+      }
+
+      .m-info {
+        color: #600;
+        font-size: 20rpx;
+        margin-top: 10rpx;
+      }
+    }
+
+    .m-bd {
+      display: flex;
+      position: relative;
+      .m-price {
+        color: #dd0000;
+        margin: 0 20rpx;
+      }
+      .m-unit {
+        width: 40rpx;
+        font-size: 20rpx;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .m-step1 {
+    .m-bd {
+      flex: 1;
+      display: flex;
+      position: relative;
+      align-items: center;
+
+      .m-val {
+        text-align: center;
+      }
+
+      .at-input {
+        padding: 0;
+      }
+
+      .at-input::after {
+        border-bottom-width: 0;
+      }
+
+      .at-input input {
+        font-size: 1.5rem;
+      }
+
+      .m-up {
+        position: absolute;
+        right: -15rpx;
+        top: 0;
+        font-size: 20rpx;
+      }
+    }
+  }
+
+  .m-step2 {
+    flex-direction: column;
+  }
+
+  .m-step3 {
+    flex-direction: column;
+
+    .m-main {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .m-tl {
+        flex: 1;
+      }
+    }
+  }
+
+  .m-step {
+    display: flex;
+    font-weight: 300;
+    font-size: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6rpx;
+    padding: 10rpx 30rpx;
+    margin-top: 20rpx;
+
+    .m-chk {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ccc;
+      width: 60px;
+      height: 60px;
+      border: 1px dashed #ccc;
+      margin-right: 10rpx;
+      font-size: 30rpx;
+      &.sel {
+        border: 1px solid @AP_BASE;
+        // background: @AP_BASE;
+        // color: #fff;
+        color: @AP_BASE;
+      }
+
+      .m-pt {
+        color: #ee0000;
+      }
+    }
+
+    .m-sel {
+      display: flex;
+      /*border-bottom: 1rpx solid #eee;*/
+      /*padding: 0 0 20rpx;*/
+      /*margin-bottom: 20rpx;*/
+
+      .m-area {
+        display: flex;
+        flex-direction: column;
+        width: calc( 100vw / 5 - 10rpx );
+        height: calc( 100vw / 5 - 10rpx );
+        border: 1rpx dashed #aaa;
+        margin: 5rpx;
+        padding: 0 20rpx 10rpx 20rpx;
+        box-sizing: border-box;
+        justify-content: space-evenly;
+
+        &.sel {
+          // background: @AP_BASE;
+          border: 2rpx solid @AP_BASE;
+          .u-nb {
+            color: #fff!important;
+            &:nth-child(2) {
+              border-top: 1rpx dashed #fff;
+            }
+          }
+        }
+
+        .u-nb {
+          font-size: 1.2rem;
+          font-family: "Georgia";
+          padding-bottom: 10rpx;
+          color: #ccc;
+
+          &:nth-child(2) {
+            border-top: 1rpx dashed #ccc;
+            text-align: right;
+            font-size: 1.4rem;
+            color: #999;
+          }
+        }
+
+        .u-img {
+          width: 50rpx;
+          height: 50rpx;
+        }
+      }
+    }
+
+    .m-group {
+      display: flex;
+      border: 1px dashed #999;
+      margin: 5rpx;
+      padding: 10rpx;
+      align-items: center;
+      box-sizing: border-box;
+      color: #ccc;
+      flex: 1;
+
+      &.sel {
+        border: 2rpx solid @AP_BASE;
+        // background: @AP_BASE;
+        // color: #fff;
+        color: @AP_BASE;
+        .m-h {
+          color: #fff;
+        }
+      }
+
+      .m-item {
+        display: flex;
+        font-size: 1rem;
+        justify-content: center;
+        flex: 1;
+      }
+    }
+
+    .m-wrap+.m-wrap {
+      margin-top: 0;
+      padding-top: 0;
+      border-top:none;
+    }
+
+    .m-wrap {
+      display: flex;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 20rpx;
+      border-top: 1px solid #eee;
+      padding-top: 20rpx;
+
+      .m-tl {
+        flex: 1;
+        color: #999;
+      }
+      .m-bd {
+        color: #dd0000;
+        margin: 0 20rpx;
+      }
+      .m-unit {
+        width: 40rpx;
+        font-size: 20rpx;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .m-info {
+      display: flex;
+      font-size: 20rpx;
+      margin-top: 10rpx;
+      color: #600;
+      font-family: "microsoft yahei";
+    }
+  }
+
+  .g-area {
+    background: rgba(0,0,0,.1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    z-index: 10;
+
+    .m-wrap {
+      width: 100%;
+      background: #eee;
+      height: 50vh;
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      flex-wrap: wrap;
+      border-top: 1px solid #ccc;
+
+      .m-ipt {
+        background: #fff;
+        width: calc( (100% - 60rpx)/3 ) ;
+        font-weight: 300;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #eee;
+        margin: 10rpx;
+        border-radius: 10rpx;
+        box-shadow: 0px 2px 2px rgba(0,0,0,.5);
+        transition: .3s;
+        &:active {
+          transform: scale(0.98); 
+          box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+        }
+      }
+
+      .m-ipt-save {
+        font-size: 1.2rem;
+        background: @AP_BASE;
+        color: #fff;
+        width: 100%;
+      }
+      .m-ipt-del {
+        font-size: 1.2rem;
+        background: #dd0000;
+        color: #fff;
+        image {
+          height: 45rpx;
+          width: 45rpx;
+        }
+      }
+      
+      
+    }
+
+    .u-ret {
+
+    }
+  }
+}

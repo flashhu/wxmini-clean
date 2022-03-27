@@ -23,7 +23,7 @@ const ConfirmOrder: FC = () => {
       // 首次进页面栈，运行时机在 useEffect 前
       addrStore.getAddrList();
     }
-    const { count, addressIndex } = getCurrentInstance()?.router?.params || {};
+    const { count } = getCurrentInstance()?.router?.params || {};
     if (count) {
       // 商品详情页直接下单
       setBuyList([{
@@ -37,10 +37,6 @@ const ConfirmOrder: FC = () => {
       setBuyList(shopStore?.cartList || []);
       setSumPrice(shopStore?.cartSumCount);
       shopStore.setIsFromCart(true);
-    }
-    if(addressIndex) {
-      // 从地址列表页指定地址
-      console.log('index', addressIndex)
     }
   });
 
@@ -111,7 +107,7 @@ const ConfirmOrder: FC = () => {
             circle
             type="primary"
             onClick={handlePay}
-            disabled={buyList?.length === 0}
+            disabled={buyList?.length === 0 && !addrStore?.selectedAddress?.id}
           >
             立即支付
           </AtButton>
