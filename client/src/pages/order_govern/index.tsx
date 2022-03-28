@@ -10,7 +10,7 @@ import './index.less'
 const OrderGovern: FC = () => {
   const handleChangeType = (t: 'g' | 'm') => {
     orderStore.setCurrType(t);
-    orderStore.setArea(0);
+    orderStore.resetGovern();
   }
 
   const handleAreaChange = (val: string) => {
@@ -112,7 +112,7 @@ const OrderGovern: FC = () => {
           </View>
         </View>}
       {(orderStore.area !== 0) &&
-        <View className="fn-btn-sb" onClick={goToNextStep}>下一步</View>}
+        <View className="fn-btn-sb circle" onClick={goToNextStep}>下一步</View>}
     </View>
   )
 }

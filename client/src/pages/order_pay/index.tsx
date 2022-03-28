@@ -1,7 +1,7 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 import { observer } from 'mobx-react'
-import Taro, { useDidShow, getCurrentInstance } from '@tarojs/taro'
-import { View, Text, Input, Textarea, Image, Picker, Checkbox, CommonEventFunction } from '@tarojs/components'
+import Taro, { useDidShow } from '@tarojs/taro'
+import { View, Text, Image, Picker, CommonEventFunction } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import * as dayjs from 'dayjs'
 import ICON_RIGHT from '@/static/ico_right.png'
@@ -11,7 +11,6 @@ import orderStore from '@/store/order'
 import './index.less'
 
 const OrderPay: FC = () => {
-  const [isAgree, setIsAgree] = useState(false);
   const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
 
   useEffect(() => {
@@ -20,6 +19,7 @@ const OrderPay: FC = () => {
   }, [])
 
   useDidShow(() => {
+    orderStore.resetPay();
     if (!addrStore.addrList?.length) {
       // 首次进页面栈，运行时机在 useEffect 前
       addrStore.getAddrList();
@@ -47,7 +47,7 @@ const OrderPay: FC = () => {
   }
 
   const handlePay = () => {
-    console.log('pay');
+    orderStore.payForService(addrStore?.selectedAddress?.id);
   }
 
   return (
@@ -72,12 +72,12 @@ const OrderPay: FC = () => {
         <Image className='icon-16' src={ICON_RIGHT}></Image>
       </view>
       <view className='m-card flex-column-center'>
-        <view className='m-key mr-8'>检</view>
+        <view className='m-key mr-8'>{orderStore.selectedService?.type}</view>
         <view className='flex-1'>
-          <view className='f-bold'>溯源检测</view>
+          <view className='f-bold'>{orderStore.selectedService?.name}</view>
           <view className='flex-row-space-bet f-14 f-number'>
-            <text className='f-gray7'>2点位</text>
-            <text className='f-red'>¥ 199</text>
+            <text className='f-gray7'>{orderStore.selectedService?.spec}</text>
+            <text className='f-red'>¥ {orderStore.selectedService?.price}</text>
           </view>
         </view>
       </view>
@@ -99,8 +99,8 @@ const OrderPay: FC = () => {
         <View className="info">
           <view className='flex-column-center'>
             <view
-              className={`icon icon-circle ${isAgree ? 'selected' : ''}`}
-              onClick={() => setIsAgree(!isAgree)}
+              className={`icon icon-circle ${orderStore.hasAgree ? 'selected-green' : ''}`}
+              onClick={() => orderStore.reverseHasAgree()}
             ></view>
             <view className='ml-4'>
               本人知晓并同意
@@ -112,7 +112,7 @@ const OrderPay: FC = () => {
         <view className='flex'>
           <View className="left">
             <Text className="await-pay">合计： </Text>
-            <Text className="amount-money">¥ 110</Text>
+            <Text className="amount-money">¥ {orderStore.selectedService?.price}</Text>
           </View>
           <View className="right">
             <AtButton
@@ -120,7 +120,7 @@ const OrderPay: FC = () => {
               circle
               type="primary"
               onClick={handlePay}
-              disabled={true}
+              disabled={!(orderStore.hasAgree && orderStore.selectedService?.price && Boolean(addrStore?.selectedAddress?.id))}
             >
               立即支付
             </AtButton>

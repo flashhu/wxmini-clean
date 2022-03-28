@@ -1,0 +1,156 @@
+@import "../../style/atom.less";
+
+.g-order_his {
+  padding: 20rpx;
+  background: #eee;
+  height: 100vh;
+  overflow: scroll;
+
+  .m-tl {
+    font-size: 40rpx;
+    color: #333;
+    text-align: center;
+    letter-spacing: 4rpx;
+    margin: 20rpx 0;
+    font-weight: 200;
+  }
+
+  .m-bd {
+    display: flex;
+    flex-direction: column;
+    .m-row {
+      display: flex;
+      background: #fff;
+      border-radius: 10rpx;
+      padding: 16rpx 0 ;
+      margin: 0 0 20rpx 0;
+      flex-direction: column;
+
+      .m-hd {
+        display: flex;
+        padding-bottom: 10rpx;
+        border-bottom: 1px dashed #999;
+        color: #333;
+
+        &>.m-item {
+          display: flex;
+          justify-content: center;
+        }
+
+        .m-id {
+          width: 60rpx;
+          align-items: center;
+        }
+
+        .m-date {
+          flex: 1;
+          font-size: 26rpx;
+          display: flex;
+          justify-content: left;
+          align-items: center;
+        }
+
+        .m-tp {
+          flex: 1;
+        }
+
+        .m-money {
+          padding: 0 20rpx;
+          position: relative;
+          display: flex;
+          align-items: baseline;
+          color: #cc0000;
+          font-family: 'georgia';
+
+          .m-i {
+            font-size: 40rpx;
+          }
+          .m-f {
+            font-size: 20rpx;
+          }
+
+          &:before {
+            content: '¥';
+            display: block;
+            font-size: 20rpx;
+            position: absolute;
+            left: -4rpx;
+            bottom: 4rpx;
+          }
+        }
+      }
+
+
+      .m-detail {
+        display: flex;
+        flex-direction: column;
+        padding: 10rpx 20rpx;
+        border-top: 1rpx dashed #ccc;
+        font-size: 24rpx;
+
+        .m-item {
+          display: flex;
+          padding: 4rpx;
+          font-size: 20rpx;
+
+          .m-item-tl {
+            flex: 1;
+          }
+          .m-item-ct {
+            color: #666;
+          }
+        }
+      }
+
+      .m-service {
+        display: flex;
+        flex-direction: column;
+        padding: 20rpx;
+        color: #666;
+
+        .m-info+.m-info {
+          margin-top: 10rpx;
+        }
+        .m-info {
+          display: flex;
+          font-size: 24rpx;
+          align-items: center;
+
+          .m-info-tl {
+            flex: 1;
+          }
+          .m-info-vl {
+            position: relative;
+            text-align: center;
+
+            .m-d-u {
+              margin-left: 8rpx;
+            }
+            .m-d-t {
+              font-size: 12rpx;
+              position: absolute;
+              right: -15rpx;
+              top: 0;
+              font-size: 20rpx;
+            }
+          }
+
+          .m-svr {
+            padding: 4rpx 10rpx;
+            color: #066633;
+            border: 1px dashed #066633;
+          }
+
+          .m-safe {
+            width: 50rpx;
+            height: 50rpx;
+            color: #cc0000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}

@@ -134,6 +134,30 @@ class BuyGoodsValidator extends LinValidator {
     }
 }
 
+class OrderServiceValidator extends LinValidator {
+    constructor() {
+        super();
+        this.address_id = [ new Rule('isInt', '请检查地址的传参', { min: 1 })];
+        this.type = [new Rule('isIn', '请检查服务类型的传参', ['s', 'c', 'g', 'm'])];
+        this.area = [new Rule('isOptional'), new Rule('isNumeric', '请检查治理面积的传参')];
+        this.point = [new Rule('isOptional'), new Rule('isInt', '请检查检测点位的传参', { min: 1 })];
+        this.tech_type = [new Rule('isOptional'), new Rule('isInt', '请检查技术人员类型的传参', { min: 1 })];
+        this.is_insure = [new Rule('isOptional'), new Rule('isBoolean', '请检查是否保险的传参')];
+        this.date = [new Rule('isDate', '请检查预约时间的传参', { format: 'YYYY-MM-DD' })];
+        this.sum_price = [new Rule('isNumeric', '请检查总价的传参')];
+    }
+
+    validateGovernType(vals) {
+        const { type, area, point, tech_type, is_insure } = vals.body || {};
+        if(['g', 'm'].includes(type) && !(area && tech_type && (is_insure !== undefined))) {
+            throw new Error('请检查传参是否完整')
+        }
+        if(['s', 'c'].includes(type) && !point) {
+            throw new Error('请检查传参是否完整')
+        }
+    }
+}
+
 module.exports = {
     PositiveIntegerValidator,
     RegisterValidator,
@@ -142,5 +166,6 @@ module.exports = {
     AddCaseValidator,
     AddAddrValidator,
     UpdateAddrValidator,
-    BuyGoodsValidator
+    BuyGoodsValidator,
+    OrderServiceValidator
 }

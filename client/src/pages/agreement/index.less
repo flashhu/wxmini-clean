@@ -1,0 +1,66 @@
+.g-agreement {
+  padding: 20rpx;
+  background: #fff;
+  height: calc( 100vh - 130rpx );
+  overflow: scroll;
+
+  .m-head {
+    font-size: 40rpx;
+    color: #333;
+    text-align: center;
+    letter-spacing: 4rpx;
+    margin: 20rpx 0
+  }
+
+  .m-bd {
+    display: flex;
+    flex-direction: column;
+
+    .m-ind {
+      text-indent:40rpx;
+    }
+
+    .m-p {
+      margin-top: 20rpx;
+    }
+    .m-list {
+      font-size: 28rpx;
+      color: #666;
+      font-family: "microsoft yahei";
+      margin-top: 10rpx;
+      text-align: justify;
+      line-height: 1.6;
+
+      .m-red {
+        display: inline-block;
+        width: 160rpx;
+        border-bottom: 1px solid #333;
+        text-align: center;
+        color: #dd0000;
+      }
+
+      &.m-hd {
+        margin: 20rpx 0;
+        font-size: 28rpx;
+      }
+
+      .m-tl {
+        flex: 1;
+      }
+    }
+  }
+
+  .m-ft {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 40rpx;
+
+    .m-tl {
+      font-size: 32rpx;
+    }
+    .m-phone {
+      font-size: 28rpx;
+    }
+  }
+}

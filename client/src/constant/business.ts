@@ -1,4 +1,11 @@
 // ---- 预约服务 ----
+export const SERVICE_MAP = {
+  's': '溯源检测',
+  'c': 'CMA检测',
+  'g': '国标治理',
+  'm': '母婴治理'
+}
+
 /**
  * 产品单价
  */
@@ -13,6 +20,11 @@ export const PER_PRICE = {
  * 每平米治理费用
  */
 export const GOVERN_PER_COST = 6;
+
+/**
+ * 工程师可选类型
+ */
+export const PERSON_TYPES = ['高级+中级', '高级+高级'];
 
 /**
  * 工程师时薪

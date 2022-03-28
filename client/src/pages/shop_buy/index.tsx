@@ -107,7 +107,7 @@ const ConfirmOrder: FC = () => {
             circle
             type="primary"
             onClick={handlePay}
-            disabled={buyList?.length === 0 && !addrStore?.selectedAddress?.id}
+            disabled={!(buyList?.length && Boolean(addrStore?.selectedAddress?.id))}
           >
             立即支付
           </AtButton>

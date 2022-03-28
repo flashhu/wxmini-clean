@@ -6,6 +6,7 @@ const { Address } = require('../app/models/address')
 const { Good } = require('../app/models/good')
 const { GoodOrder } = require('../app/models/good_order')
 const { GoodOrderDetail } = require('../app/models/good_order_detail')
+const { ServiceOrder } = require('../app/models/service_order')
 
 // user <-1--n-> address
 User.hasMany(Address, {
@@ -60,5 +61,28 @@ Good.hasMany(GoodOrderDetail, {
 GoodOrderDetail.belongsTo(Good, {
   as: 'info',
   foreignKey: 'good_id',
+  allowNull: false
+});
+
+// 减少多次聚合的开销
+// user <-1--n-> good order
+User.hasMany(ServiceOrder, {
+  foreignKey: 'user_id',
+  allowNull: false
+});
+ServiceOrder.belongsTo(User, {
+  as: 'u',
+  foreignKey: 'user_id',
+  allowNull: false
+});
+
+// address <-1--n-> good order
+Address.hasMany(ServiceOrder, {
+  foreignKey: 'address_id',
+  allowNull: false
+});
+ServiceOrder.belongsTo(Address, {
+  as: 'address',
+  foreignKey: 'address_id',
   allowNull: false
 });
