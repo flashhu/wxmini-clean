@@ -3,12 +3,13 @@
 .buy {
   min-height: 100vh;
   background: #eee;
+  padding: 20rpx;
 
   .addr {
     background-color: #fff;
-    border-radius: 0 0 30rpx 30rpx;
+    border-radius: 30rpx;
     overflow: hidden;
-    border-bottom: 1px solid #cac9c9;
+    box-shadow: 0 5px 10px -5px #cac9c9;
 
     &-icon {
       height: 32rpx;
@@ -16,11 +17,11 @@
     }
   }
 
-  .addr-border {
-    height: 10rpx;
-    background-size: 64rpx 10rpx;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAKBAMAAACOO0tGAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURf///4u16OxtbZ3B7Ozz/PjDw9Dh9vSmprjS8vDm7e57e/GNjfvd3f7w8AXfhcMAAABSSURBVCjPY2CAAFYl7CAAKs+QKIgViMHkD2HXrw6TZ8GuX7ABKs+7CLsBG2AGOGPXLwyT58auX+sCTIEhdgNMYPJF2A3Qgclz4PCBw2gQUiMIAenMONnjpCz0AAAAAElFTkSuQmCC);
-  }
+  // .addr-border {
+  //   height: 10rpx;
+  //   background-size: 64rpx 10rpx;
+  //   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAKBAMAAACOO0tGAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURf///4u16OxtbZ3B7Ozz/PjDw9Dh9vSmprjS8vDm7e57e/GNjfvd3f7w8AXfhcMAAABSSURBVCjPY2CAAFYl7CAAKs+QKIgViMHkD2HXrw6TZ8GuX7ABKs+7CLsBG2AGOGPXLwyT58auX+sCTIEhdgNMYPJF2A3Qgclz4PCBw2gQUiMIAenMONnjpCz0AAAAAElFTkSuQmCC);
+  // }
 
   .buy_list {
     display: flex;
@@ -32,15 +33,15 @@
       display: flex;
       margin-top: 20rpx;
       height: 300px;
-      width: 700px;
+      width: 100%;
       border-radius: 30px;
       background-color: white;
+      box-shadow: 0 5px 10px -5px #cac9c9;
 
       &_left {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 220px;
         height: 300px;
         margin-left: 20px;
 
@@ -54,16 +55,15 @@
 
       &_right {
         padding: 36px;
+        flex: 1;
         display: flex;
         flex-direction: column;
-        width: 510px;
         height: 300px;
 
         &_title {
           margin-top: 15px;
           color: #333;
           padding: 5px 10px;
-          width: 510px;
           font-size: 32px;
           line-height: 40px;
           overflow: hidden;
@@ -72,7 +72,6 @@
         &_spe {
           color: #333;
           padding: 5px 10px;
-          width: 510px;
           font-size: 28px;
           line-height: 40px;
           overflow: hidden;
@@ -81,7 +80,6 @@
         &_price {
           color: #333;
           padding: 10px 10px;
-          width: 510px;
           font-size: 28px;
           line-height: 40px;
           overflow: hidden;

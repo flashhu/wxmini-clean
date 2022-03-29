@@ -86,7 +86,8 @@ const HisAddr: FC = () => {
   const handleSelect = (index: number) => {
     const pages = Taro.getCurrentPages();
     const prevPage = pages[pages.length-2];
-    if(prevPage?.route === 'pages/shop_buy/index') {
+    const PagesNeedBack = ['pages/shop_buy/index', 'pages/order_pay/index'];
+    if(PagesNeedBack.includes(prevPage?.route)) {
       addrStore.setSelectedAddrIndex(index);
       Taro.navigateBack();
     }

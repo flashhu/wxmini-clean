@@ -15,11 +15,11 @@ const OrderPay: FC = () => {
 
   useEffect(() => {
     addrStore.setSelectedAddrIndex(0);
+    orderStore.setHasAgree(false);
     orderStore.setSelectedDate(tomorrow);
   }, [])
 
   useDidShow(() => {
-    orderStore.resetPay();
     if (!addrStore.addrList?.length) {
       // 首次进页面栈，运行时机在 useEffect 前
       addrStore.getAddrList();

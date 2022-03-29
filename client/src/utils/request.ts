@@ -30,7 +30,7 @@ const errorHandler = error => {
     msg = data.msg;
   }
   if (data.error_code === 1001) {
-    // token 过期，重新获取
+    // TODO: token 过期，重新获取
   }
   Taro.showToast({
     icon: 'none',
@@ -56,13 +56,13 @@ export const baseOptions = async (params, method: 'GET' | 'POST' = 'GET') => {
           resolve(res?.data);
         } else {
           // 后端拦截错误
-          console.log('请求接口出现问题:', res);
+          console.log('请求接口出现问题1:', res, url);
           errorHandler(res);
           reject(res);
         }
       },
       fail(e) {
-        console.log('请求接口出现问题: ', e);
+        console.log('请求接口出现问题2: ', e, url);
         Taro.showToast({
           icon: 'none',
           title: '网络异常, 请重试'

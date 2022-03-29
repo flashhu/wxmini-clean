@@ -40,7 +40,7 @@ const OrderDetect: FC = () => {
               className='m-val'
               type='number'
               name='point'
-              value={String(orderStore.point)}
+              value={String(orderStore.point || '')}
               maxlength={3}
               focus
               onChange={handlePointChange}

@@ -39,7 +39,7 @@ const OrderGovern: FC = () => {
             className='m-val'
             type='number'
             name='area'
-            value={String(orderStore.area)}
+            value={String(orderStore.area || '')}
             maxlength={5}
             focus
             onChange={handleAreaChange}

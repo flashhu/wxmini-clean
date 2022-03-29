@@ -75,7 +75,7 @@ class ShopStore {
         })
         Taro.setStorageSync('cartList', []);
       }
-      Taro.navigateTo({ url: '/pages/his_shopping/index' });
+      Taro.redirectTo({ url: '/pages/his_shopping/index' });
     } catch (error) {
       console.log(error);
       Taro.hideLoading();
