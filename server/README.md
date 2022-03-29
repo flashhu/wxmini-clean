@@ -1,3 +1,8 @@
+## 部署与使用
+
+1. 微信云托管发布：[Node.JS自定义部署](https://developers.weixin.qq.com/miniprogram/dev/wxcloudrun/src/quickstart/custom/node.html)
+2. 小程序控制台[设置 request 合法域名](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html#1.%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE)
+
 ### 洋葱模型
 
 * 方便对后续中间件返回结果进行处理

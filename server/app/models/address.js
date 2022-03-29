@@ -24,7 +24,7 @@ class Address extends Model {
    * @returns
    */
   static async addAddr(params) {
-    const addr = await this.getDefaultAddr(params?.user_id);
+    const addr = await this.getDefaultAddr(params.user_id);
     if(params.is_default && addr) {
       // 该用户已存在默认地址
       return await sequelize.transaction(async t => {

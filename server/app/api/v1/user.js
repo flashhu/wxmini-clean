@@ -5,6 +5,10 @@ const router = new Router({
     prefix: '/v1/user'
 })
 
+router.get('/', async (ctx)=> {
+    success();
+})
+
 /**
  * 用户注册
  */
