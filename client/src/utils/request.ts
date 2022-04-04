@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro';
 import { Base64 } from 'js-base64'
 import { API_SERVER } from '@/constant/apis';
+import { getToken } from '@/utils/login';
 
 const HTTP_STATUS = {
   SUCCESS: 200,
@@ -20,17 +21,18 @@ const encode = () => {
   return 'Basic ' + base64
 }
 
-const errorHandler = error => {
+const errorHandler = async (error) => {
   const { data = {} } = error;
-  let msg = '网络异常, 请重试'
-  if (data.msg instanceof Array && data.msg.length > 0) {
+  let msg = '网络异常, 请重试';
+  if (data.error_code === 1001) {
+    // token 过期，重新获取
+    const token = await getToken();
+    Taro.setStorageSync('token', token);
+  } else if (data.msg instanceof Array && data.msg.length > 0) {
     // showtoast 对提示有字数限制
     msg = data.msg[0];
   } else if (typeof (data.msg) === "string") {
     msg = data.msg;
-  }
-  if (data.error_code === 1001) {
-    // TODO: token 过期，重新获取
   }
   Taro.showToast({
     icon: 'none',
