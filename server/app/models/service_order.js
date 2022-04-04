@@ -17,7 +17,8 @@ class ServiceOrder extends Model {
         as: 'address',
         attributes: { exclude: ['user_id', 'is_default'] }
       }],
-      attributes: ['id', 'type', 'area', 'point', 'tech_type', 'is_insure', 'date', 'sum_price', ['created_at', 'create_date']]
+      attributes: ['id', 'type', 'area', 'point', 'tech_type', 'is_insure', 'date', 'sum_price', ['created_at', 'create_date']],
+      order: [['created_at', 'DESC']]
     })
   }
 

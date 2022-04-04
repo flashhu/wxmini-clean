@@ -29,7 +29,8 @@ class GoodOrder extends Model {
           attributes: { exclude: ['id'] }
         }]
       }],
-      attributes: ['id', 'sum_price', 'comment', ['created_at', 'date']]
+      attributes: ['id', 'sum_price', 'comment', ['created_at', 'date']],
+      order: [['created_at', 'DESC']]
     });
   }
 

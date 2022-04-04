@@ -4,4 +4,4 @@
  * @returns string
  */
 export const fract = (n: number | string) =>
-  ((Number(n) - Math.trunc(Number(n))) * 100).toString().padEnd(2, '0');
+  ((Number(n) - Math.trunc(Number(n))) * 100).toFixed(0).toString().padEnd(2, '0');
