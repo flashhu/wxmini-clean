@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
-import { useDidShow, useShareAppMessage } from '@tarojs/taro'
+import Taro, { useDidShow, useShareAppMessage } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { IMG_SERVER } from '@/constant/apis';
 import caseStore from '@/store/case';
+import { TEST_URL } from './config';
 import './index.less'
 
 const Case: FC = () => {
@@ -17,6 +18,12 @@ const Case: FC = () => {
     caseStore.getCaseList();
   });
 
+  const goToArticle = (item) => {
+    // if (item?.url) {
+      Taro.navigateTo({ url: `/pages/webview/index?data=${encodeURIComponent(JSON.stringify({ url: TEST_URL }))}` })
+    // }
+  }
+
   return (
     <View className='g-case'>
       <View className="m-title">
@@ -27,7 +34,7 @@ const Case: FC = () => {
       <View className="m-tl">艾尔森服务案例</View>
       <View className="m-case">
         {caseStore?.list?.map((item, i) =>
-          <View className="m-item" key={i}>
+          <View className="m-item" key={i} onClick={() => goToArticle(item)}>
             <View className="m-head">
               <View className="m-name">{item?.name}</View>
             </View>

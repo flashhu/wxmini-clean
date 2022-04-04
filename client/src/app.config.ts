@@ -16,6 +16,7 @@ export default defineAppConfig({
     'pages/his_shopping/index',
     'pages/order_govern/index',
     'pages/agreement/index',
+    'pages/webview/index',
   ],
   tabBar: {
     color: '#aaa',
