@@ -6,6 +6,7 @@ import { AtFloatLayout, AtInputNumber } from 'taro-ui'
 import { View, Text, Image, Button } from '@tarojs/components'
 import { IMG_SERVER } from '@/constant/apis';
 import shopStore from '@/store/shop';
+import useCheckLogin from '@/hooks/useCheckLogin'
 import './index.less'
 
 const GoodDetail: FC = () => {
@@ -16,6 +17,8 @@ const GoodDetail: FC = () => {
   // 操作类型
   const [isCart, setIsCart] = useState(true);
   const { img_h1, img_h2, img_bd, name, spec, price, unit } = shopStore?.currGoodInfo ?? {};
+
+  useCheckLogin();
 
   useShareAppMessage(res => ({
     title: '艾尔森净化',

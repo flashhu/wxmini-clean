@@ -5,9 +5,12 @@ import { AtInput } from 'taro-ui'
 import { View, Text } from '@tarojs/components'
 import { Menus, TechType } from './config'
 import orderStore from '@/store/order'
+import useCheckLogin from '@/hooks/useCheckLogin'
 import './index.less'
 
 const OrderGovern: FC = () => {
+  useCheckLogin();
+
   const handleChangeType = (t: 'g' | 'm') => {
     orderStore.setCurrType(t);
     orderStore.resetGovern();

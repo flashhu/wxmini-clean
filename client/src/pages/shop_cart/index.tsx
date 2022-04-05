@@ -6,9 +6,12 @@ import { View, Text, Image } from '@tarojs/components'
 import shopStore from '@/store/shop';
 import { IMG_SERVER } from '@/constant/apis';
 import ICON_DEL from '@/static/ico_del_g.png';
+import useCheckLogin from '@/hooks/useCheckLogin'
 import './index.less'
 
 const ShopCart: FC = () => {
+  useCheckLogin();
+
   useDidShow(() => {
     if (!shopStore?.cartList?.length) {
       shopStore.getCartList();

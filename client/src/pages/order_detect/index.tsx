@@ -4,10 +4,13 @@ import Taro from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { AtInput } from 'taro-ui'
 import orderStore from '@/store/order'
+import useCheckLogin from '@/hooks/useCheckLogin'
 import { Menus } from './config'
 import './index.less'
 
 const OrderDetect: FC = () => {
+  useCheckLogin();
+
   const handleChangeType = (t: 's' | 'c') => {
     orderStore.setCurrType(t);
     orderStore.setPoint(0);
