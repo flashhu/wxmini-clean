@@ -30,11 +30,11 @@ const AgreeMent: FC = () => {
 
   return (
     <View className='g-bd g-agreement'>
-        { (['g', 'm'].includes(orderStore.currType)) &&
+      {(['g', 'm'].includes(orderStore.currType)) &&
         <View className="m-head">民用建筑室内空气污染治理协议</View>}
-        { (['s', 'c'].includes(orderStore.currType)) &&
+      {(['s', 'c'].includes(orderStore.currType)) &&
         <View className="m-head">民用建筑室内空气环境检测协议</View>}
-        { (['g', 'm'].includes(orderStore.currType)) &&
+      {(['g', 'm'].includes(orderStore.currType)) &&
         <View className="m-bd">
           <View className="m-list m-hd">
             <View className="m-tl">浙江艾尔森环保科技有限公司</View>
@@ -64,8 +64,8 @@ const AgreeMent: FC = () => {
           </View>
           <View className="m-list">
             3、乙方在治理过程中，因乙方因素造成甲方财产损失，应照价赔偿。
-              ① 因乙方所使用产品原因，对甲方室内的装饰器材、家具、摆设物、灯饰、办公设备等室内物品造成腐蚀或者损伤，乙方应照价赔偿。
-              ② 因乙方施工不当等人为因素造成甲方财产损失，乙方应照价赔偿。
+            ① 因乙方所使用产品原因，对甲方室内的装饰器材、家具、摆设物、灯饰、办公设备等室内物品造成腐蚀或者损伤，乙方应照价赔偿。
+            ② 因乙方施工不当等人为因素造成甲方财产损失，乙方应照价赔偿。
           </View>
           <View className="m-list">
             4、乙方对所负责的工程质量保质期十年（甲方在不新添加污染源的情况下）。在工程质量保证期内，甲方对工程质量有异议。甲方自行可委托“官方”具有CMA资质的第三方检测部门进行室内空气质量复检。检测时甲乙双方均需在场，若复检结果不符合同约定，乙方进行二次治理，若二次治理数据仍然达不到合同约定标准，乙方全额退款并承担甲方委托“官方”第三方检测费用。
@@ -94,9 +94,9 @@ const AgreeMent: FC = () => {
           <View className="m-list">2、治理服务结束后7日内，甲、乙双方须进行验收检测，检测时甲、乙双方均须在场，依据本合同指定的检测（验收）标准，如乙方没有达到双方制定目标的，乙方必须免费再治理一次，如还未合格，双方可协商处理或全额退款。</View>
           <View className="m-p">六、争议处理</View>
           <View className="m-list">合同履行过程中，如发生争议，双方应友好协商解决。如协商未果，应向乙方所在地法院提起诉讼。</View>
-        </View> }
+        </View>}
 
-        { (['s', 'c'].includes(orderStore.currType)) &&
+      {(['s', 'c'].includes(orderStore.currType)) &&
         <View className="m-bd">
           <View className="m-list m-hd">
             <View className="m-tl">浙江艾尔森环保科技有限公司</View>
@@ -159,13 +159,15 @@ const AgreeMent: FC = () => {
           <View className="m-list">合同履行过程中，如发生争议，双方应友好协商解决。如协商未果，应向乙方所在地法院提起诉讼。</View>
         </View>}
 
-        <View className="m-ft">
-          <View className="m-tl">浙江艾尔森环保科技有限公司</View>
-          <View className="m-phone">电话: 4000-253-123</View>
-        </View>
-
-        <View className={`fn-btn-sb circle ${disabled ? 'disabled': ''}`} onClick={goBack}>我已知悉</View>
+      <View className="m-ft">
+        <View className="m-tl">浙江艾尔森环保科技有限公司</View>
+        <View className="m-phone">电话: 4000-253-123</View>
       </View>
+
+      <view className='fixed-bottom safe-area-bottom bg-white'>
+        <View className={`fn-btn-sb circle ${disabled ? 'disabled' : ''}`} onClick={goBack}>我已知悉</View>
+      </view>
+    </View>
   )
 }
 

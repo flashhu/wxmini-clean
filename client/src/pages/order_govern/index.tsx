@@ -115,7 +115,9 @@ const OrderGovern: FC = () => {
           </View>
         </View>}
       {(orderStore.area !== 0) &&
-        <View className="fn-btn-sb circle" onClick={goToNextStep}>下一步</View>}
+        <view className='fixed-bottom safe-area-bottom'>
+          <View className="fn-btn-sb circle" onClick={goToNextStep}>下一步</View>
+        </view>}
     </View>
   )
 }

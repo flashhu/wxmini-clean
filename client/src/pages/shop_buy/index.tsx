@@ -7,6 +7,7 @@ import shopStore from '@/store/shop'
 import addrStore from '@/store/address'
 import { GoodItem } from '@/typings/good'
 import ICON_RIGHT from '@/static/ico_right.png'
+import ICON_ADDR from '@/static/ico_address.png'
 import { IMG_SERVER } from '@/constant/apis'
 import './index.less'
 
@@ -67,14 +68,18 @@ const ConfirmOrder: FC = () => {
           {
             addrStore?.selectedAddress?.name ? (
               <view>
-                <view className='flex f-bold'>
-                  <view>{addrStore?.selectedAddress?.name}</view>
+                <view className='flex-column-center f-bold'>
+                  <Image className='icon-18' src={ICON_ADDR}></Image>
+                  <view className='ml-8'>{addrStore?.selectedAddress?.name}</view>
                   <view className='ml-8'>{addrStore?.selectedAddress?.phone}</view>
                 </view>
-                <view className='f-14 f-gray9'>{addrStore?.selectedAddress?.addr}</view>
+                <view className='f-14 f-gray9 ml-26'>{addrStore?.selectedAddress?.addr}</view>
               </view>
             ) :
-              <view className='f-14 f-gray9'>请选择收件人信息</view>
+              <view className='flex-column-center'>
+                <Image className='icon-18' src={ICON_ADDR}></Image>
+                <view className='f-14 f-gray9 ml-8'>请选择收件人信息</view>
+              </view>
           }
           <Image className='addr-icon' src={ICON_RIGHT}></Image>
         </view>
