@@ -1,5 +1,6 @@
 const { LinValidator, Rule } = require('../../core/lin-validator-v2')
 const { LoginType } = require('../lib/enum')
+const { GoodOrder } = require('../models/good_order')
 
 class PositiveIntegerValidator extends LinValidator {
     constructor() {
@@ -158,6 +159,30 @@ class OrderServiceValidator extends LinValidator {
     }
 }
 
+class CommentGoodsValidator extends LinValidator {
+    constructor() {
+        super();
+        this.order_id = [ new Rule('isInt', '请检查地址的传参', { min: 1 })];
+        this.comment = [new Rule('isOptional'), new Rule('isLength', '评论长度需为1~100位', { min: 1, max: 100 })];
+    }
+
+    validateInfoType(vals) {
+        if (vals.body.info && !Array.isArray(vals.body.info)) {
+            throw new Error('请检查商品列表的类型')
+        }
+    }
+
+    async validateOrder(vals) {
+        const order_id = vals.body.order_id;
+        const order = await GoodOrder.findOne({
+            where: { id: order_id }
+        });
+        if (!order) {
+            throw new Error('请检查订单是否存在')
+        }
+    }
+}
+
 module.exports = {
     PositiveIntegerValidator,
     RegisterValidator,
@@ -167,5 +192,6 @@ module.exports = {
     AddAddrValidator,
     UpdateAddrValidator,
     BuyGoodsValidator,
-    OrderServiceValidator
+    OrderServiceValidator,
+    CommentGoodsValidator
 }

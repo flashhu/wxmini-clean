@@ -1,5 +1,5 @@
 import { get, post } from '@/utils/request';
-import { BuyGoodRequestParam } from '@/typings/good_order';
+import { BuyGoodRequestParam, CommentOrderRequestParam } from '@/typings/good_order';
 
 export const getGoods = (): Promise<any> => {
   return get({
@@ -16,6 +16,13 @@ export const getGoodOrders = (): Promise<any> => {
 export const buyGoods = (data: BuyGoodRequestParam): Promise<any> => {
   return post({
     url: '/v1/shop/buy',
+    data
+  })
+}
+
+export const commentOrder = (data: CommentOrderRequestParam): Promise<any> => {
+  return post({
+    url: '/v1/shop/comment',
     data
   })
 }

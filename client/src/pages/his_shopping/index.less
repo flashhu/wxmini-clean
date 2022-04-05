@@ -1,5 +1,8 @@
+@import '../../style/atom.less';
+@import '../../style/icon.less';
+
 .g-order_shop {
-  padding: 20rpx;
+  padding: 32rpx;
   background: #eee;
   height: 100vh;
   overflow: scroll;
@@ -19,9 +22,9 @@
     .m-row {
       display: flex;
       background: #fff;
-      border-radius: 10rpx;
+      border-radius: 20rpx;
       padding: 16rpx 0 ;
-      margin: 0 0 20rpx 0;
+      margin: 0 0 32rpx 0;
       flex-direction: column;
 
       .m-hd {
@@ -42,7 +45,6 @@
 
         .m-date {
           flex: 1;
-          font-size: 26rpx;
           display: flex;
           justify-content: left;
           align-items: center;
@@ -84,12 +86,11 @@
         flex-direction: column;
         padding: 10rpx 20rpx;
         border-top: 1rpx dashed #ccc;
-        font-size: 24rpx;
+        font-size: 28rpx;
 
         .m-item {
           display: flex;
           padding: 4rpx;
-          font-size: 20rpx;
 
           .m-item-tl {
             flex: 1;
@@ -105,6 +106,7 @@
         flex-direction: column;
         padding: 20rpx 20rpx 10rpx 20rpx;
         color: #666;
+        font-size: 28rpx;
 
         .m-good {
           display: flex;
@@ -112,18 +114,39 @@
 
           .m-id {
             width: 40rpx;
-            font-size: 24rpx;
           }
           .m-name {
             flex: 1;
-            font-size: 24rpx;
           }
           .m-pr {
-            font-size: 24rpx;
             font-family: 'georgia';
           }
         }
       }
+
+      .m-action {
+        display: flex;
+        justify-content: flex-end;
+        border-top: 1px dashed #999;
+        padding: 16rpx 20rpx 0;
+      }
+    }
+  }
+
+  .m-comment {
+    position: relative;
+    padding: 0 16rpx;
+    min-height: 520rpx;
+
+    .m-btn {
+      position: absolute;
+      bottom: 0;
+      margin: 16rpx 0;
+      width: calc(100% - 32rpx);
+    }
+
+    .m-goods {
+      max-height: 240rpx;
     }
   }
 }

@@ -20,10 +20,11 @@ export interface OrderListResponseData {
 export interface OrderListItem {
   id: number;
   sum_price: number;
-  comment: null;
+  comment?: string;
   date: string;
   address: Address;
-  item: ItemItem[];
+  item: OrderGoodItem[];
+  canComment?: boolean;
 }
 
 interface Address {
@@ -33,11 +34,11 @@ interface Address {
   addr: string;
 }
 
-interface ItemItem {
+export interface OrderGoodItem {
   good_id: number;
   count: number;
   sum_price: number;
-  is_favor: null;
+  is_favor?: number;
   info: Info;
 }
 
@@ -49,4 +50,16 @@ interface Info {
   img_h1: string;
   img_h2: string;
   img_bd: string;
+}
+
+// -------- /v1/shop/comment --------
+export interface CommentOrderRequestParam {
+  order_id: number;
+  comment: string;
+  list: CommentItem[];
+}
+
+export interface CommentItem {
+  good_id: number;
+  is_favor: number;
 }

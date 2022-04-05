@@ -57,6 +57,42 @@ class GoodOrder extends Model {
       return order
     })
   }
+
+  /**
+   * 评论
+   * @param {number} user_id
+   * @param {number} order_id
+   * @param {string} comment
+   * @param {array} list [good_id, is_favor]
+   */
+  static async commentOrder(order_id, comment, list) {
+    // 1. 取待操作的记录
+    const order = await GoodOrder.findOne({
+      where: { id: order_id }
+    });
+    const details = await GoodOrderDetail.findAll({
+      where: { order_id }
+    })
+    // 2. 转换格式
+    const dic = {};
+    const ids = [];
+    for(let item of list) {
+      dic[item.good_id] = item.is_favor;
+      ids.push(item.good_id);
+    }
+    return await sequelize.transaction(async t => {
+      await order.update({
+        comment: comment || '-'
+      }, { transaction: t });
+      for(let info of details) {
+        if(ids.includes(info.good_id)) {
+          await info.update({
+            is_favor: dic[info.good_id]
+          }, { transaction: t });
+        }
+      }
+    })
+  }
 }
 
 GoodOrder.init({

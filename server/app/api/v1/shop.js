@@ -3,7 +3,7 @@ const { Auth } = require('../../../middlewares/auth');
 const { Good } = require('../../models/good');
 const { GoodOrder } = require('../../models/good_order');
 const { success } = require('../../lib/helper')
-const { BuyGoodsValidator } = require('../../validators/validator');
+const { BuyGoodsValidator, CommentGoodsValidator } = require('../../validators/validator');
 
 const router = new Router({
     prefix: '/v1/shop'
@@ -31,6 +31,13 @@ router.post('/buy', new Auth().m, async (ctx)=> {
   const v = await new BuyGoodsValidator().validate(ctx);
   const { address_id, sum_price, list } = v.get('body');
   await GoodOrder.addOrder(ctx.auth.uid, address_id, sum_price, list);
+  success();
+})
+
+router.post('/comment', new Auth().m, async (ctx)=> {
+  const v = await new CommentGoodsValidator().validate(ctx);
+  const { order_id, comment, list } = v.get('body');
+  await GoodOrder.commentOrder(order_id, comment, list);
   success();
 })
 
