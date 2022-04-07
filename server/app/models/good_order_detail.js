@@ -22,7 +22,7 @@ GoodOrderDetail.init({
   },
   count: Sequelize.INTEGER,
   sum_price: Sequelize.INTEGER,
-  is_favor: Sequelize.BOOLEAN
+  is_favor: Sequelize.TINYINT(2)
 }, {
   sequelize,
   tableName: 'good_order_sp'

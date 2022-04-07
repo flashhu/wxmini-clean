@@ -1,9 +1,10 @@
 // 商品订单表
-const { Sequelize, Model } = require('sequelize')
+const { Sequelize, Model, Op } = require('sequelize')
 const { sequelize } = require('../../core/db')
 const { Address } = require('./address')
 const { GoodOrderDetail } = require('./good_order_detail')
 const { Good } = require('./good')
+const { User } = require('./user')
 
 class GoodOrder extends Model {
   /**
@@ -92,6 +93,30 @@ class GoodOrder extends Model {
         }
       }
     })
+  }
+
+  static async getCommentForGood(id, params = {}) {
+    return await GoodOrder.findAll({
+      ...params,
+      where: {
+        [Op.and]: [{
+          comment: { [Op.not]: null }
+        }, {
+          comment: { [Op.not]: '-' }
+        }]
+      },
+      include: [{
+        model: GoodOrderDetail,
+        as: 'item',
+        where: {
+          good_id: id,
+          is_favor: { [Op.or]: [1, 2] }
+        },
+        attributes: ['is_favor']
+      }],
+      attributes: ['id', 'comment', ['updated_at', 'date']],
+      order: [['updated_at', 'DESC']]
+    });
   }
 }
 

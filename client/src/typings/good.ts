@@ -10,3 +10,26 @@ export interface GoodItem {
   img_bd: string,
   count?: number
 }
+
+// -------- /v1/shop/goodDetail/:id --------
+export interface GoodDetailResponseData {
+  info: GoodItem;
+  sales: number;
+  appraise: IAppraise;
+  comments: ICommentsItem[];
+}
+
+interface IAppraise {
+  agree: number;
+  disagree: number;
+}
+
+interface ICommentsItem {
+  id: number;
+  comment: string;
+  date: string;
+  item: IItemItem[];
+}
+interface IItemItem {
+  is_favor: number;
+}

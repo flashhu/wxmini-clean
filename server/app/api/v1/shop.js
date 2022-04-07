@@ -3,7 +3,7 @@ const { Auth } = require('../../../middlewares/auth');
 const { Good } = require('../../models/good');
 const { GoodOrder } = require('../../models/good_order');
 const { success } = require('../../lib/helper')
-const { BuyGoodsValidator, CommentGoodsValidator } = require('../../validators/validator');
+const { BuyGoodsValidator, CommentGoodsValidator, PositiveIntegerValidator } = require('../../validators/validator');
 
 const router = new Router({
     prefix: '/v1/shop'
@@ -16,6 +16,20 @@ router.get('/goodList', async (ctx)=> {
   const res = await Good.getGoods();
   ctx.body = {
     data: res
+  };
+})
+
+/**
+ * 商品详情
+ */
+router.get('/goodDetail/:id', async (ctx)=> {
+  const v = await new PositiveIntegerValidator().validate(ctx);
+  // 商品详情、销量、点赞/踩数据
+  const info = await Good.getDetail(v.get('path.id'));
+  const comments = await GoodOrder.getCommentForGood(v.get('path.id'));
+  ctx.body = {
+    ...info,
+    comments
   };
 })
 

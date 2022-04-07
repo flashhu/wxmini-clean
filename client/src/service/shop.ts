@@ -7,6 +7,12 @@ export const getGoods = (): Promise<any> => {
   })
 }
 
+export const getGoodDetail = (id: number): Promise<any> => {
+  return get({
+    url: `/v1/shop/goodDetail/${id}`
+  })
+}
+
 export const getGoodOrders = (): Promise<any> => {
   return get({
     url: '/v1/shop/orderList'

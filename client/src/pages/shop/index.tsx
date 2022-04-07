@@ -21,6 +21,7 @@ const Shop: FC = () => {
 
   const goToGoodDetail = (id: number) => {
     shopStore.setSelectedId(id);
+    shopStore.setSelectedGoodDetail({});
     Taro.navigateTo({
       url: `/pages/shop_sp/index?id=${id}`
     })

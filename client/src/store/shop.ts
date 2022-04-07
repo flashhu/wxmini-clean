@@ -1,8 +1,8 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import Taro from '@tarojs/taro';
 import * as dayjs from 'dayjs'
-import { getGoods, buyGoods, getGoodOrders, commentOrder } from '@/service/shop';
-import { GoodItem } from '@/typings/good';
+import { getGoods, buyGoods, getGoodOrders, commentOrder, getGoodDetail } from '@/service/shop';
+import { GoodItem, GoodDetailResponseData } from '@/typings/good';
 import { BuyGoodRequestParam, OrderListItem, OrderGoodItem, CommentItem } from '@/typings/good_order';
 import { isInPeriod } from '@/utils/utils';
 
@@ -11,6 +11,8 @@ class ShopStore {
   list: GoodItem[] = [];
   // 当前商品详情的 id
   selectedId = 1;
+  // 当前商品详情
+  selectedGoodDetail: Partial<GoodDetailResponseData> = {};
   // 购物车列表
   cartList: GoodItem[] = [];
   // 区分下单商品页的入口
@@ -40,6 +42,22 @@ class ShopStore {
     } catch (error) {
       console.log(error);
       Taro.hideLoading();
+    }
+  }
+
+  // 商品详情
+  async getGoodInfo(id: number) {
+    try {
+      const res = await getGoodDetail(id);
+      res.comments = (res?.comments || [])?.map((item) => ({
+        ...item,
+        date: dayjs(item?.date).format('YYYY-MM-DD HH:mm:ss')
+      }))
+      runInAction(() => {
+        this.selectedGoodDetail = res || {};
+      })
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -121,6 +139,10 @@ class ShopStore {
 
   setSelectedId(id: number) {
     this.selectedId = id;
+  }
+
+  setSelectedGoodDetail(data: Partial<GoodDetailResponseData>) {
+    this.selectedGoodDetail = data;
   }
 
   setIsFromCart(val: boolean) {
