@@ -16,7 +16,9 @@ const Shop: FC = () => {
   }));
 
   useDidShow(() => {
-    shopStore.getGoodList();
+    if(!shopStore?.list?.length) {
+      shopStore.getGoodList();
+    }
   });
 
   const goToGoodDetail = (id: number) => {

@@ -26,9 +26,6 @@ class AddressStore {
 
   async addAddr(data: AddrItem) {
     try {
-      Taro.showLoading({
-        title: '加载中',
-      })
       const res = await addAddress(data);
       if (res?.data) {
         const newList = this.addrList.map((item) => ({
@@ -43,20 +40,15 @@ class AddressStore {
       Taro.showToast({
         title: '地址已添加'
       })
-      Taro.hideLoading();
       return Promise.resolve();
     } catch (error) {
       console.log(error);
-      Taro.hideLoading();
       return Promise.reject();
     }
   }
 
   async delAddr(id: number, index: number) {
     try {
-      Taro.showLoading({
-        title: '加载中',
-      })
       await delAddress({ id });
       runInAction(() => {
         this.addrList.splice(index, 1);
@@ -64,18 +56,13 @@ class AddressStore {
       Taro.showToast({
         title: '地址已删除'
       })
-      Taro.hideLoading();
     } catch (error) {
       console.log(error);
-      Taro.hideLoading();
     }
   }
 
   async updateAddr(params: Partial<AddrItem>, index: number) {
     try {
-      Taro.showLoading({
-        title: '加载中',
-      })
       await updateAddress(params);
       runInAction(() => {
         this.addrList = this.addrList.map((item, i) => {
@@ -90,10 +77,8 @@ class AddressStore {
       Taro.showToast({
         title: '地址已更新'
       })
-      Taro.hideLoading();
     } catch (error) {
       console.log(error);
-      Taro.hideLoading();
     }
   }
 

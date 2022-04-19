@@ -15,7 +15,9 @@ const Case: FC = () => {
   }));
 
   useDidShow(() => {
-    caseStore.getCaseList();
+    if(!caseStore?.list?.length) {
+      caseStore.getCaseList();
+    }
   });
 
   const goToArticle = (item) => {

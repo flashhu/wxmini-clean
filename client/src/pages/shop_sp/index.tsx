@@ -116,7 +116,7 @@ const GoodDetail: FC = () => {
                       <view className='f-gray9 f-14 mt-4'>{item?.date}</view>
                     </view>
                   )): (
-                    <view className='flex-center f-gray9 mt-16'>
+                    <view className='m-empty'>
                       暂时没有评论...
                     </view>
                   )

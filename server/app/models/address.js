@@ -1,5 +1,6 @@
 const { Sequelize, Model } = require('sequelize')
 const { sequelize } = require('../../core/db')
+const { NotFound, AuthFailed } = require('../../core/httpException')
 
 class Address extends Model {
   static async getAddr(user_id) {
@@ -45,26 +46,48 @@ class Address extends Model {
    * @returns
    */
   static async updateAddr(params, id, user_id) {
-    const addr = await this.getDefaultAddr(user_id);
-    if (params.is_default && addr) {
-      // 该用户已存在默认地址
-      return await sequelize.transaction(async t => {
-        await addr.update({
-          is_default: 0
-        }, { transaction: t });
-        return Address.update(params, { where: { id }, transaction: t });
-      })
+    const addr = await Address.findOne({
+      where: { id }
+    });
+    const gOrders = await addr.getGoodOrders();
+    const sOrders = await addr.getServiceOrders();
+    if(!addr) {
+      throw new NotFound('地址不存在');
+    } else if(gOrders.length || sOrders.length) {
+      throw new AuthFailed('存在关联该地址的订单,暂不支持修改');
+    } else {
+      const defaultAddr = await this.getDefaultAddr(user_id);
+      if (params.is_default && defaultAddr) {
+        // 该用户已存在默认地址
+        return await sequelize.transaction(async t => {
+          await defaultAddr.update({
+            is_default: 0
+          }, { transaction: t });
+          return addr.update(params, { transaction: t });
+        })
+      }
+      return await addr.update(params);
     }
-    return await Address.update(params, { where: { id } });
   }
 
   static async delAddr(id) {
-    return await Address.destroy({
-      where: { id },
-      // force: false 软删除，插入时间戳标记
-      // force: true  物理删除
-      force: false,
+    const addr = await Address.findOne({
+      where: { id }
     });
+    const gOrders = await addr.getGoodOrders();
+    const sOrders = await addr.getServiceOrders();
+    if(!addr) {
+      throw new NotFound('地址不存在');
+    } else if(gOrders.length || sOrders.length) {
+      throw new AuthFailed('存在关联该地址的订单,暂不支持删除');
+    } else {
+      return await Address.destroy({
+        where: { id },
+        // force: false 软删除，插入时间戳标记
+        // force: true  物理删除
+        force: false,
+      });
+    }
   }
 }
 
