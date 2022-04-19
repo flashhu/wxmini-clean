@@ -49,14 +49,15 @@ class Address extends Model {
     const addr = await Address.findOne({
       where: { id }
     });
+    const defaultAddr = await this.getDefaultAddr(user_id);
     const gOrders = await addr.getGoodOrders();
     const sOrders = await addr.getServiceOrders();
+    const onlyUpdateDefault = Object.keys(params).length === 1 && Object.keys(params)[0] === 'is_default';
     if(!addr) {
       throw new NotFound('地址不存在');
-    } else if(gOrders.length || sOrders.length) {
+    } else if((gOrders.length || sOrders.length) && !onlyUpdateDefault) {
       throw new AuthFailed('存在关联该地址的订单,暂不支持修改');
     } else {
-      const defaultAddr = await this.getDefaultAddr(user_id);
       if (params.is_default && defaultAddr) {
         // 该用户已存在默认地址
         return await sequelize.transaction(async t => {
